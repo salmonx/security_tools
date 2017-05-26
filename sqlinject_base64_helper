@@ -1,0 +1,33 @@
+<?php
+error_reporting(0);
+?>
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<TITLE>base64 inject tool</TITLE>
+</HEAD>
+<BODY>
+
+<form method = post  >
+<input type = text name="url" style="width: 500px;" value = "<?php $url = isset($_POST['url'])?$_POST['url']:''; echo $url;?>" > URL <span style = "font-size:12px ;">Eg:[ http://www.baidu.com/s?wd= ]</span></input>
+
+<input type = text  name="bv"  style= "font-size:20px;width: 800px" value ="<?php $bv =  isset ($_POST['bv'])?$_POST['bv']:'';echo $bv; ?>"></input>
+<input type = submit name = "submit" style= "font-size:18px;width: 80px" value = "inject"></input>
+</form>
+
+<?php
+if (isset ($_POST['submit'])){
+        
+         if ( !empty($_POST['bv']) && !empty( $_POST['url']) ){
+                 $url = $_POST['url'];
+                 $bve = base64_encode($_POST['bv']);
+                 $url1 = $url.$bve;
+                 echo "<span style = 'font-size: 14px'>".$url1."</span>";
+         }
+}
+?>
+</BODY>
+</HTML>
+
+
+<iframe  src = "<?php if (isset($url1)){echo $url1;}?>" width= "100%" height = "100%"  ></iframe >
